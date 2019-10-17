@@ -4,5 +4,5 @@ class Item:
         self.name = name
         self.description = description
         self.category = category
-        self.quantity =quantity
+        self.quantity = quantity
         return

@@ -14,5 +14,5 @@ class User:
 
     def purchase_Cart(self, cart):
         # TODO: prompt user for info and build order out of shopping cart
-        #       empty shopping car after purchase
+        #       empty shopping cart after purchase
         pass
