@@ -1,5 +1,3 @@
-import Department
-
 class Online_Shopping_Center:
     def __init__(self):
         self.departments = list()
