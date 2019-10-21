@@ -1,0 +1,4 @@
+def queryDatabase(query):
+    
+
+    return

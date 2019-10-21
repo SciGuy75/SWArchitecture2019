@@ -1,5 +1,6 @@
 import Inventory_Management
 import User_Management
+import sqlite3
 
 def viewCart():
     print(myUser.shopping_Cart)
