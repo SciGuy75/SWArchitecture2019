@@ -15,5 +15,17 @@ class Cart:
 
     def total_Price(self):
         # TODO: go through list of items, sum price*quantity
-        pass
-        #Test
+        total = 0
+        for item in self.current_Items:
+            total += item.price*item.quantity
+        return total
+
+    def __str__(self):
+        output = "Shopping cart for "+self.username+"\n"
+        for item in self.current_Items:
+            output += item.name+"\n"
+            output += "  $"+item.price+"x"+item.quantity+" = "+(item.price*item.quantity)+"\n"
+            output += "\n"
+
+        output += "Total price: $"+self.total_Price()
+        return output
