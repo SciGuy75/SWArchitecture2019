@@ -18,6 +18,7 @@ def logOut():
 
 
 print ("Welcome to Our store!")
+print ('(type username "exit" to quit)')
 a = False
 
 #logging in
@@ -26,11 +27,14 @@ while a == False:
     username = input()
     #exit program
     if username == "exit":
+        # exit program
         break
     print ("Enter password:")
     password = input()
 
-    if username == "admin" and password == "pass":
+    if not(username == "admin" and password == "pass"):
+        print ("Incorrect credentials, try again!")
+    else: #username == admin and password == "pass"
         myUser = User_Management.User(username, password)
         print(myUser.username)
         print("You're logged in!")
@@ -59,10 +63,9 @@ while a == False:
                 #call show order function
                 order()
             elif option == 5:
-                #logouut
+                #logout
                 logOut()
             else:
                 print ("Invalid choice, try again!")
+        # exit program
         a = True
-    else:
-        print ("Incorrect credentials, try again!")
