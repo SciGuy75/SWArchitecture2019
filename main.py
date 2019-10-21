@@ -8,8 +8,11 @@ a = False
 while a == False:
     print ("Enter username:")
     username = input()
+    if username == "exit":
+        break
     print ("Enter password:")
     password = input()
+
     if username == "admin" and password == "pass":
         print("You're logged in!")
         print("Here's our menu option")
