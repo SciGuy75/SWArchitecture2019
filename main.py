@@ -109,7 +109,7 @@ def logOut():
     print("you're logged out!")
 
 
-print ("Welcome to Our store!\n")
+print ("Welcome to our store! (type 'exit' as username to quit)\n")
 a = False
 
 #logging in
@@ -117,15 +117,14 @@ while a == False:
     username = input("Enter username: ")
     #exit program
     if username == "exit":
+        # exit program
         break
     password = input("Enter password: ")
 
-    if username == "admin" and password == "pass":
+    if not(username == "admin" and password == "pass"):
+        print ("Incorrect credentials, try again!\n")
+    else: #username == admin and password == "pass"
         myUser = User_Management.User(username, password)
         print("You're logged in!")
         mainMenu()
-
-
         a = True
-    else:
-        print ("Incorrect credentials, try again!\n")
