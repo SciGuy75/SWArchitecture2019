@@ -1,6 +1,7 @@
 import Inventory_Management
 import User_Management
 import sqlite3
+from query_database.py import queryDatabase
 
 def mainMenu():
     print("\nHere's our menu option")
