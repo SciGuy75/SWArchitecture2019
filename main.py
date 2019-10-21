@@ -63,7 +63,7 @@ while a == False:
                 #call show order function
                 order()
             elif option == 5:
-                #logouut
+                #logout
                 logOut()
             else:
                 print ("Invalid choice, try again!")
