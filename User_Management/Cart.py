@@ -1,3 +1,4 @@
+#Might need to change Cart to shopping_Cart, because that is whats called in the main file.
 class Cart:
     def __init__(self, username):
         self.username = username
@@ -26,6 +27,7 @@ class Cart:
             output += item.name+"\n"
             output += "  $"+item.price+"x"+item.quantity+" = "+(item.price*item.quantity)+"\n"
             output += "\n"
+            #printing might look wierd here. might need "\n---\n"
 
         output += "Total price: $"+self.total_Price()
         return output
