@@ -1,6 +1,22 @@
 import Inventory_Management
 import User_Management
 
+def viewCart():
+    print(myUser.shopping_Cart)
+
+def viewInventory():
+    print("Here is the inventory")
+
+def purchaseHistory():
+    print("Here is your purchase history")
+
+def order():
+    print("Here is your order")
+
+def logOut():
+    print("you're logged out!")
+
+
 print ("Welcome to Our store!")
 a = False
 
@@ -8,12 +24,15 @@ a = False
 while a == False:
     print ("Enter username:")
     username = input()
+    #exit program
     if username == "exit":
         break
     print ("Enter password:")
     password = input()
 
     if username == "admin" and password == "pass":
+        myUser = User_Management.User(username, password)
+        print(myUser.username)
         print("You're logged in!")
         print("Here's our menu option")
         print ("[1] View Cart")
@@ -29,19 +48,19 @@ while a == False:
             option = int(input())
             if option == 1:
                 #call view cart function
-                print("Here is your cart")
+                viewCart()
             elif option == 2:
                 #call show inventory function
-                print("Here is the inventory")
+                viewInventory()
             elif option == 3:
                 #call show purchase history function
-                print("Here is your purchase history")
+                purchaseHistory()
             elif option == 4:
                 #call show order function
-                print("Here is your order")
+                order()
             elif option == 5:
                 #logouut
-                print("you're logged out!")
+                logOut()
             else:
                 print ("Invalid choice, try again!")
         a = True

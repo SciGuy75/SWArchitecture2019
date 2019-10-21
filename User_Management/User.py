@@ -2,8 +2,8 @@ from User_Management import Cart
 from User_Management import Order
 
 class User:
-    def __init__(self, is_Admin, username, password):
-        self.is_Admin = is_Admin
+    def __init__(self, username, password):
+        #self.is_Admin = is_Admin
         self.username = username
         self.password = password
         self.shipping_Address = ""

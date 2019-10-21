@@ -8,7 +8,7 @@ class Cart:
         # TODO: take an item and add to cart, update cart total
         pass
 
-    def remove_Item(self, item, quantity):
+    def change_Quantity(self, item, quantity):
         # TODO: take an item, check if in cart, remove corresponding amount
         #       remove from cart if reduced down to 0 or less
         pass
