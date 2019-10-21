@@ -2,6 +2,7 @@ import Inventory_Management
 import User_Management
 
 print ("Welcome to Our store!")
+print ('(type username "exit" to quit)')
 a = False
 
 #logging in
@@ -9,11 +10,14 @@ while a == False:
     print ("Enter username:")
     username = input()
     if username == "exit":
+        # exit program
         break
     print ("Enter password:")
     password = input()
 
-    if username == "admin" and password == "pass":
+    if not(username == "admin" and password == "pass"):
+        print ("Incorrect credentials, try again!")
+    else: #username == admin and password == "pass"
         print("You're logged in!")
         print("Here's our menu option")
         print ("[1] View Cart")
@@ -44,6 +48,5 @@ while a == False:
                 print("you're logged out!")
             else:
                 print ("Invalid choice, try again!")
+        # exit program
         a = True
-    else:
-        print ("Incorrect credentials, try again!")
