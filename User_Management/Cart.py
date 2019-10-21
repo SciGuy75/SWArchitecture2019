@@ -5,15 +5,16 @@ class Cart:
         return
 
     def add_Item(self, item, quantity):
-        # TODO: take an item and add to cart, update cart total
-        pass
+        for count in range(0, quantity):
+            self.current_Items.append(item)
+        return
 
     def remove_Item(self, item, quantity):
-        # TODO: take an item, check if in cart, remove corresponding amount
-        #       remove from cart if reduced down to 0 or less
-        pass
+        if item in self.current_Items:
+            self.current_Items.remove(item)
+        return
 
     def total_Price(self):
-        # TODO: go through list of items, sum price*quantity
-        pass
-        #Test
+        total_Price = 0
+        for item in self.current_Items:
+            total_Price = total_Price + item.price
