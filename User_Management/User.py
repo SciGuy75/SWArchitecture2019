@@ -13,6 +13,12 @@ class User:
         return
 
     def purchase_Cart(self, cart):
-        # TODO: prompt user for info and build order out of shopping cart
-        #       empty shopping cart after purchase
-        pass
+        #syntax might be incorrect, but I am trying and will fix it later
+        order_Created = Order.Order()
+        order_Created.username = self.username
+        order_Created.shipping_Address = self.shipping_Address
+        order_Created.credit_Card = self.payment_Info
+        order_Created.total_Price = cart.total_Price()
+        order_Created.items = cart.current_items
+        self.previous_Orders.append(order_Created)
+        return
