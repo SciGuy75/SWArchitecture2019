@@ -38,6 +38,7 @@ def viewInventoryMenu(inventory):
         print ("[1] Add item to cart")
         print ("[2] Back to main menu")
         option = input("Enter number to choose: ")
+        desiredItem = None
 
         # Add item cart
         if option == "1":
@@ -45,15 +46,16 @@ def viewInventoryMenu(inventory):
                 itemAdd = input("Enter the item name to add: ")
                 for item in inventory:
                     if item.name == itemAdd:
+                        desiredItem = item
                         break
                 print ('Item "'+itemAdd+'" not found, try again\n')
             
             added = False
             while added == False:
                 itemAmount = int(input("Enter amount of item to add: "))
-                amountAvailable = checkItemQuantity(itemAdd)
+                amountAvailable = checkItemQuantity(desiredItem.name)
                 if itemAmount <= amountAvailable:
-                    myUser.shopping_Cart.add_Item(itemAdd, itemAmount)
+                    myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
                     print ("Items are added to your cart!")
                 else:
