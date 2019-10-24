@@ -1,3 +1,2 @@
-from .Online_Shopping_Center import Online_Shopping_Center
-from .Department import Department
+from .DatabaseHelper import *
 from .Item import Item
