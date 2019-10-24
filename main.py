@@ -53,6 +53,8 @@ def viewCart():
             print ("Invalid choice, try again!\n")
 
 def viewInventory():
+    inventoryList = queryDatabase("SELECT * FROM Inventory")
+    print (inventoryList)
     print ("\nHere is the inventory")
     print ("[1] Add item to cart")
     print ("[2] Back to main menu")
