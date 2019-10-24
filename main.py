@@ -35,12 +35,12 @@ def viewInventory():
         if option == "1":
             itemAdd = input("Enter the item name to add: ")
             added = False
-            while added == True:
+            while added == False:
                 itemAmount = input("Enter amount of item to add: ")
                 dbItemAmount = checkItemQuantity(itemAdd)
                 print(int(dbItemAmount))
-                if itemAmount <= dbItemAmount:
-                    add_Item(itemAdd, itemAmount)
+                if int(itemAmount) <= dbItemAmount:
+                    myUser.shopping_Cart.add_Item(itemAdd, itemAmount)
                     added = True
                     print ("Items are added to your cart!")
                 else:
