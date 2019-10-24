@@ -24,7 +24,7 @@ def getUserOrders(username):
     orderList = list()
 
     for orderData in orderDataList:
-        order = Order(orderData[0], orderData[1], orderData[2], orderData[3], orderData[4], orderData[5])
+        order = Order(orderData[1], orderData[2], orderData[3], orderData[4], orderData[5])
         orderList.append(order)
 
     return orderList
