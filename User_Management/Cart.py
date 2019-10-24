@@ -22,7 +22,7 @@ class Cart:
         item = self.tryGetItem(item)
         if item == None:
             raise RuntimeWarning("Can't change quantity of item since it isn't in the cart")
-        
+
         item.quantity = newQuantity
         # removed all of item from cart
         if item.quantity <= 0:
@@ -49,7 +49,7 @@ class Cart:
         return None
 
     def __str__(self):
-        output = "Shopping cart for "+self.username+"\n"
+        output = "\nShopping cart for "+self.username+"\n"
         for item in self.current_Items:
             output += item.name+"\n"
             output += "  $"+str(item.price)+"x"+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n"
