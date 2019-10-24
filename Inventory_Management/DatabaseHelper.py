@@ -14,8 +14,9 @@ def getInventory():
     return itemList
 
 def checkItemQuantity(itemName):
-    quantitycheck = queryDatabase('select quantity from Inventory where name = "'+itemName+'"')
-    return quantitycheck[0]
+    query = 'select quantity from Inventory where name = "'+itemName+'"'
+    quantitycheck = queryDatabase(query)
+    return quantitycheck[0][0]
 
 def getUserOrders(username):
     query = 'select * from Orders where username = "'+username+'"'
