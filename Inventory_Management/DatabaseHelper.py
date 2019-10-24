@@ -1,12 +1,12 @@
 import sqlite3
 from .Item import Item
-from .Order import Order
+from User_Management import Order
 
 def getInventory():
     query = "select * from Inventory"
     itemDataList = queryDatabase(query)
     itemList = list()
-    
+
     for itemData in itemDataList:
         item = Item(itemData[0], itemData[1], itemData[2], itemData[3], itemData[4])
         itemList.append(item)
@@ -14,7 +14,7 @@ def getInventory():
     return itemList
 
 def checkItemQuantity(itemName):
-    quantitycheck = 'select quantity from Inventory where name = "'+itemName+'"'
+    quantitycheck = queryDatabase('select quantity from Inventory where name = "'+itemName+'"')
     return quantitycheck[0]
 
 def getUserOrders(username):

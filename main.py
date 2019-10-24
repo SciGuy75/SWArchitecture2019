@@ -34,9 +34,17 @@ def viewInventory():
         option = input("Enter number to choose: ")
         if option == "1":
             itemAdd = input("Enter the item name to add: ")
-            itemAmount = input("Enter amount of item to add: ")
-            #add item to cart
-            print ("Items are added to your cart!")
+            added = False
+            while added == True:
+                itemAmount = input("Enter amount of item to add: ")
+                dbItemAmount = checkItemQuantity(itemAdd)
+                print(int(dbItemAmount))
+                if itemAmount <= dbItemAmount:
+                    add_Item(itemAdd, itemAmount)
+                    added = True
+                    print ("Items are added to your cart!")
+                else:
+                    print ("We don't have enough amount in stock, try again!")
         elif option == "2":
             return
         else:
