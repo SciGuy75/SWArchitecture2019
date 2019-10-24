@@ -1,7 +1,10 @@
 import Inventory_Management
 import User_Management
 import sqlite3
-from query_database.py import queryDatabase
+from query_database import queryDatabase
+
+#DEBUGGING ONLY
+import test
 
 def mainMenu():
     print("\nHere's our menu option")
@@ -31,7 +34,9 @@ def mainMenu():
             #logouut
             logOut()
         else:
-            print ("Invalid choice, try again!\n")
+            print ("Invalid choice, try again!\n") 
+            #DEBUGGING ONLY
+            test.debugMenu(myUser)
 
 def viewCart():
     print("\n")
@@ -127,6 +132,7 @@ while a == False:
         print ("Incorrect credentials, try again!\n")
     else: #username == admin and password == "pass"
         myUser = User_Management.User(username, password)
+
         print("You're logged in!")
         mainMenu()
         a = True
