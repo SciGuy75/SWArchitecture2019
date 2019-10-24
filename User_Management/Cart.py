@@ -6,13 +6,34 @@ class Cart:
         return
 
     def add_Item(self, item, quantity):
-        for count in range(0, quantity):
+        if (quantity > item.quantity):
+            # attempting to buy more than available
+            raise RuntimeWarning("Can't buy "+str(quantity)+" "+item.name+" when "+str(item.quantity)+" are available")
+        item.quantity = quantity
+
+        # attempting to add an item that already exists
+        if self.tryGetItem(item) != None:
+            self.change_Quantity(item, quantity)
+        else:
             self.current_Items.append(item)
         return
 
-    def remove_Item(self, item, quantity):
-        if item in self.current_Items:
-            self.current_Items.remove(item)
+    def change_Quantity(self, item, newQuantity):
+        item = self.tryGetItem(item)
+        if item == None:
+            raise RuntimeWarning("Can't change quantity of item since it isn't in the cart")
+        
+        item.quantity = newQuantity
+        # removed all of item from cart
+        if item.quantity <= 0:
+            self.remove_Item(item)
+        return
+
+    def remove_Item(self, item):
+        item = self.tryGetItem(item)
+        if (item == None):
+            raise RuntimeWarning("Can't remove item since it isn't in the cart")
+        self.current_Items.remove(item)
         return
 
     def total_Price(self):
@@ -21,13 +42,19 @@ class Cart:
             total += item.price*item.quantity
         return total
 
+    def tryGetItem(self, desiredItem):
+        for item in self.current_Items:
+            if item.name == desiredItem.name:
+                return item
+        return None
+
     def __str__(self):
         output = "Shopping cart for "+self.username+"\n"
         for item in self.current_Items:
             output += item.name+"\n"
-            output += "  $"+item.price+"x"+item.quantity+" = "+(item.price*item.quantity)+"\n"
+            output += "  $"+str(item.price)+"x"+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n"
             output += "\n"
             #printing might look wierd here. might need "\n---\n"
 
-        output += "Total price: $"+self.total_Price()
+        output += "Total price: $"+str(self.total_Price())
         return output
