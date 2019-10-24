@@ -42,13 +42,16 @@ def viewInventoryMenu(inventory):
 
         # Add item cart
         if option == "1":
-            while True:
+            itemFound = False
+            while itemFound == False:
                 itemAdd = input("Enter the item name to add: ")
                 for item in inventory:
                     if item.name == itemAdd:
                         desiredItem = item
+                        itemFound = True
                         break
-                print ('Item "'+itemAdd+'" not found, try again\n')
+                if itemFound == False:
+                    print ('Item "'+itemAdd+'" not found, try again\n')
 
             added = False
             while added == False:

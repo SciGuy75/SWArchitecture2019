@@ -35,9 +35,9 @@ class Cart:
         return
 
     def total_Price(self):
-        total = 0
+        total = 0.0
         for item in self.current_Items:
-            total += item.price*item.quantity
+            total += float(item.price)*float(item.quantity)
         return total
 
     def tryGetItem(self, desiredItem):
