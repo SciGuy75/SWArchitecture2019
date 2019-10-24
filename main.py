@@ -1,7 +1,5 @@
 import Inventory_Management
 import User_Management
-import sqlite3
-from query_database import queryDatabase
 
 #DEBUGGING ONLY
 import test
@@ -58,8 +56,6 @@ def viewCart():
             print ("Invalid choice, try again!\n")
 
 def viewInventory():
-    inventoryList = queryDatabase("SELECT * FROM Inventory")
-    print (inventoryList)
     print ("\nHere is the inventory")
     print ("[1] Add item to cart")
     print ("[2] Back to main menu")
