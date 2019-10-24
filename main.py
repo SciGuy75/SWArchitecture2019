@@ -20,13 +20,19 @@ def viewCart():
             print ("Invalid choice, try again!\n")
 
 def viewInventory():
-    print ("\nHere is the inventory")
+    inventory = displayInventory()
+    viewInventoryMenu(inventory)
+
+def displayInventory():
     inventoryList = getInventory()
     print("Name | Description | Price($) | Quantity | Category")
     print("-----------------------------------------")
     for item in inventoryList:
         print(item.name," | ",item.description," | ",item.price," | ",item.quantity, " | ",item.category,"\n")
     print("-----------------------------------------")
+    return inventoryList
+
+def viewInventoryMenu(inventory):    
     option = 0
     while option != "1" or option != "2":
         print ("[1] Add item to cart")
