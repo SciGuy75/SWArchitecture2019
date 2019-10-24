@@ -24,8 +24,12 @@ def viewCart():
 
 def viewInventory():
     inventoryList = queryDatabase("SELECT * FROM Inventory")
-    print (inventoryList)
     print ("\nHere is the inventory")
+    print("-------------------------------")
+    for each in inventoryList:
+        print(each[0])
+        print(each[1]," | ",each[2]," | ",each[3])
+        print("-------------------------------")
     print ("[1] Add item to cart")
     print ("[2] Back to main menu")
     option = 0
