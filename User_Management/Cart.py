@@ -6,9 +6,6 @@ class Cart:
         return
 
     def add_Item(self, item, quantity):
-        if (quantity > item.quantity):
-            # attempting to buy more than available
-            raise RuntimeWarning("Can't buy "+str(quantity)+" "+item.name+" when "+str(item.quantity)+" are available")
         item.quantity = quantity
 
         # attempting to add an item that already exists
