@@ -77,7 +77,7 @@ while a == False:
         loggedIn = True
         while loggedIn == True:
             option = 0
-            while option != "1" or option != "2" or option != "3" or opiton != "4":
+            while option != "1" or option != "2" or option != "3" or option != "4":
                 option = 0
                 #choose menu option
                 print("\nHere's our menu option")
