@@ -1,4 +1,4 @@
-import Inventory_Management
+from Inventory_Management import *
 import User_Management
 
 #DEBUGGING ONLY
@@ -21,7 +21,12 @@ def viewCart():
 
 def viewInventory():
     print ("\nHere is the inventory")
-    print (inventoryList)
+    inventoryList = getInventory()
+    print("Name | Description | Price($) | Quantity | Category")
+    print("-----------------------------------------")
+    for item in inventoryList:
+        print(item.name," | ",item.description," | ",item.price," | ",item.quantity, " | ",item.category,"\n")
+    print("-----------------------------------------")
     option = 0
     while option != "1" or option != "2":
         print ("[1] Add item to cart")
