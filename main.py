@@ -20,31 +20,46 @@ def viewCart():
             print ("Invalid choice, try again!\n")
 
 def viewInventory():
-    print ("\nHere is the inventory")
+    inventory = displayInventory()
+    viewInventoryMenu(inventory)
+
+def displayInventory():
     inventoryList = getInventory()
     print("Name | Description | Price($) | Quantity | Category")
     print("-----------------------------------------")
     for item in inventoryList:
         print(item.name," | ",item.description," | ",item.price," | ",item.quantity, " | ",item.category,"\n")
     print("-----------------------------------------")
+    return inventoryList
+
+def viewInventoryMenu(inventory):
     option = 0
     while option != "1" or option != "2":
         print ("[1] Add item to cart")
         print ("[2] Back to main menu")
         option = input("Enter number to choose: ")
+        desiredItem = None
+
+        # Add item cart
         if option == "1":
-            itemAdd = input("Enter the item name to add: ")
+            while True:
+                itemAdd = input("Enter the item name to add: ")
+                for item in inventory:
+                    if item.name == itemAdd:
+                        desiredItem = item
+                        break
+                print ('Item "'+itemAdd+'" not found, try again\n')
+
             added = False
             while added == False:
-                itemAmount = input("Enter amount of item to add: ")
-                dbItemAmount = checkItemQuantity(itemAdd)
-                print(int(dbItemAmount))
-                if int(itemAmount) <= dbItemAmount:
-                    myUser.shopping_Cart.add_Item(myUser.item, itemAmount)
+                itemAmount = int(input("Enter amount of item to add: "))
+                amountAvailable = checkItemQuantity(desiredItem.name)
+                if itemAmount <= amountAvailable:
+                    myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
                     print ("Items are added to your cart!")
                 else:
-                    print ("We don't have enough amount in stock, try again!")
+                    print ("We don't have "+str(itemAmount)+" amount in stock, try again!")
         elif option == "2":
             return
         else:
