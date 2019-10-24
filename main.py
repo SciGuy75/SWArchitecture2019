@@ -40,7 +40,7 @@ def viewInventory():
                 dbItemAmount = checkItemQuantity(itemAdd)
                 print(int(dbItemAmount))
                 if int(itemAmount) <= dbItemAmount:
-                    myUser.shopping_Cart.add_Item(itemAdd, itemAmount)
+                    myUser.shopping_Cart.add_Item(myUser.item, itemAmount)
                     added = True
                     print ("Items are added to your cart!")
                 else:

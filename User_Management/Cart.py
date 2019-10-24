@@ -1,4 +1,5 @@
 #Might need to change Cart to shopping_Cart, because that is whats called in the main file.
+
 class Cart:
     def __init__(self, username):
         self.username = username
@@ -6,10 +7,10 @@ class Cart:
         return
 
     def add_Item(self, item, quantity):
-        if (quantity > item.quantity):
-            # attempting to buy more than available
-            raise RuntimeWarning("Can't buy "+str(quantity)+" "+item.name+" when "+str(item.quantity)+" are available")
-        item.quantity = quantity
+        # if (quantity > item.quantity):
+        #     # attempting to buy more than available
+        #     raise RuntimeWarning("Can't buy "+str(quantity)+" "+item.name+" when "+str(item.quantity)+" are available")
+        # item.quantity = quantity
 
         # attempting to add an item that already exists
         if self.tryGetItem(item) != None:
