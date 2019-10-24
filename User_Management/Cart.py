@@ -1,3 +1,5 @@
+from Inventory_Management import DatabaseHelper
+
 #Might need to change Cart to shopping_Cart, because that is whats called in the main file.
 class Cart:
     def __init__(self, username):
@@ -7,7 +9,6 @@ class Cart:
 
     def add_Item(self, item, quantity):
         item.quantity = quantity
-
         # attempting to add an item that already exists
         if self.tryGetItem(item) != None:
             self.change_Quantity(item, quantity)
@@ -20,6 +21,10 @@ class Cart:
         if item == None:
             raise RuntimeWarning("Can't change quantity of item since it isn't in the cart")
 
+        inventoryQuantity = DatabaseHelper.checkItemQuantity(item.name)
+        if newQuantity > inventoryQuantity:
+            raise RuntimeWarning("There are only "+str(inventoryQuantity)+" items in inventory")
+        
         item.quantity = newQuantity
         # removed all of item from cart
         if item.quantity <= 0:
