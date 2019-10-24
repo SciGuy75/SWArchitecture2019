@@ -1,3 +1,5 @@
+import sqlite3
+
 def queryDatabase(query):
     results = list()
 
