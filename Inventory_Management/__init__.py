@@ -1,2 +1,2 @@
-from .DatabaseHelper import DatabaseHelper
+from .DatabaseHelper import *
 from .Item import Item
