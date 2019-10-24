@@ -5,57 +5,56 @@ import User_Management
 import test
 
 def viewCart():
-    print("\n")
     print (myUser.shopping_Cart)
-    print ("[1] Proceed to checkout")
-    print ("[2] Back to main menu")
     option = 0
-    while option < 1 or option > 2:
-        option = int(input("Enter number to choose: "))
-        if option == 1:
+    while option != "1" or option != "2":
+        print ("[1] Proceed to checkout")
+        print ("[2] Back to main menu")
+        option = input("Enter number to choose: ")
+        if option == "1":
             #call order item function
             print ("Order confirmed")
-        elif option == 2:
+        elif option == "2":
             return
         else:
             print ("Invalid choice, try again!\n")
 
 def viewInventory():
     print ("\nHere is the inventory")
-    print ("[1] Add item to cart")
-    print ("[2] Back to main menu")
+    print (inventoryList)
     option = 0
-    while option < 1 or option > 2:
-        option = int(input("Enter number to choose: "))
-        if option == 1:
+    while option != "1" or option != "2":
+        print ("[1] Add item to cart")
+        print ("[2] Back to main menu")
+        option = input("Enter number to choose: ")
+        if option == "1":
             itemAdd = input("Enter the item name to add: ")
             itemAmount = input("Enter amount of item to add: ")
+            #add item to cart
             print ("Items are added to your cart!")
-        elif option == 2:
+        elif option == "2":
             return
         else:
             print ("Invalid choice, try again!\n")
 
 def purchaseHistory():
     print("\nHere is your purchase history")
-    print ("[1] Add item to cart")
-    print ("[2] Back to main menu")
     option = 0
-    while option < 1 or option > 2:
-        option = int(input("Enter number to choose: "))
-        if option == 1:
+    while option != "1" or option != "2":
+        print ("[1] Add item to cart")
+        print ("[2] Back to main menu")
+        option = input("Enter number to choose: ")
+        if option == "1":
             itemAdd = input("Enter the item name to add: ")
             itemAmount = input("Enter amount of item to add: ")
             print ("Items are added to your cart!")
-        elif option == 2:
+        elif option == "2":
             return
         else:
             print ("Invalid choice, try again!\n")
 
 def logOut():
     print("you're logged out!\n")
-
-
 
 a = False
 
@@ -77,30 +76,32 @@ while a == False:
         print("You're logged in!")
         loggedIn = True
         while loggedIn == True:
-            print("\nHere's our menu option")
-            print ("[1] View Cart")
-            print ("[2] View Inventory")
-            print ("[3] Purchase History")
-            print ("[4] Log out")
-
-            #choose menu option
             option = 0
-            while option < 1 or option > 4:
-                option = int(input("Enter number to choose: "))
-                if option == 1:
+            while option != "1" or option != "2" or option != "3" or opiton != "4":
+                option = 0
+                #choose menu option
+                print("\nHere's our menu option")
+                print ("[1] View Cart")
+                print ("[2] View Inventory")
+                print ("[3] Purchase History")
+                print ("[4] Log out")
+                #Can only enter integer right now
+                option = input("Enter number to choose: ")
+                if option == "1":
                     #call view cart function
                     viewCart()
-                elif option == 2:
+                elif option == "2":
                     #call show inventory function
                     viewInventory()
-                elif option == 3:
+                elif option == "3":
                     #call show purchase history function
                     purchaseHistory()
-                elif option == 4:
+                elif option == "4":
                     #logouut
                     logOut()
                     loggedIn = False
+                    break
                 else:
-                    print ("Invalid choice, try again!\n")
+                    print ("Invalid choice, try again!")
                     #DEBUGGING ONLY
-                    test.debugMenu(myUser)
+                    #test.debugMenu(myUser)
