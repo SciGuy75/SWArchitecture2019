@@ -1,5 +1,5 @@
 class Order:
-    def __init__(self, order_Id, shipping_Address, total_Price, items, credit_Card, username):
+    def __init__(self, order_Id, username, items, total_Price, credit_Card, shipping_Address):
         self.order_Id = order_Id
         self.shipping_Address = shipping_Address
         self.total_Price = total_Price
