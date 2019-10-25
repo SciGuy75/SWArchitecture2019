@@ -23,10 +23,10 @@ def viewInventory():
 
 def displayInventory():
     inventoryList = DatabaseHelper.getInventory()
-    print("{:^20} | {:<30} | {:5} | {:3} | {:<20}".format("Name", "Description", "Price", "Quantity", "Category"))
+    print("{:^20} | {:^30} | {:^7} | {:^8} | {:^20}".format("Name", "Description", "Price", "Quantity", "Category"))
     print("-"*100)
     for item in inventoryList:
-        print("{:^20} | {:<30} | ${:6.2f} | {:3d} | {:^20}".format(item.name, item.description, item.price, item.quantity, item.category))
+        print("{:<20} | {:<30} | ${:6.2f} | {:^8d} | {:<20}".format(item.name, item.description, item.price, item.quantity, item.category))
     print("-"*100)
     return inventoryList
 
