@@ -3,10 +3,11 @@ class Order:
         self.shipping_Address = shipping_Address
         self.total_Price = total_Price
         self.items = items
+        #self.quantity = orderQuantity
         self.credit_Card = credit_Card
         self.username = username
         return
-        
+
     def displayOrder(self):
         output = ""
         for item in self.items:

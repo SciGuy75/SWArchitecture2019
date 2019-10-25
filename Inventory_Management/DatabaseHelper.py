@@ -9,10 +9,10 @@ def getInventory():
     itemDataList = queryDatabase(query)
     itemList = list()
 
-    #Sends the tuple of information to the item class, so an instance is created for each item in the database 
+    #Sends the tuple of information to the item class, so an instance is created for each item in the database
     for itemData in itemDataList:
         item = Item(itemData[0], itemData[1], itemData[2], itemData[3], itemData[4])
-        #appends the tuples to a list so they can be printed. 
+        #appends the tuples to a list so they can be printed.
         itemList.append(item)
 
     return itemList
@@ -26,10 +26,10 @@ def updateInventory(items):
             raise RuntimeError(f"Can't purchase {item.name}, not enough available")
         # set new quantitiy within the item class
         item.quantity = available-item.quantity
-    
+
     #updates the amount of items in the database, once items are confirmed to be ordered
     for item in items:
-        command = f"update Inventory set quantity={str(item.quantity)} where name='{item.name}''"
+        command = f"update Inventory set quantity={str(item.quantity)} where name='{item.name}'"
         queryDatabase(command)
     return
 
@@ -38,7 +38,7 @@ def updateInventory(items):
 def getInventoryQuantity(itemName):
     query = 'select quantity from Inventory where name = "'+itemName+'"'
     quantitycheck = queryDatabase(query)
-    
+
     #isolates the tuple to a single integer to be returned
     return quantitycheck[0][0]
 

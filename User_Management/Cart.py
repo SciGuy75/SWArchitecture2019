@@ -16,15 +16,15 @@ class Cart:
             self.current_Items.append(item)
         return
 
-    def change_Quantity(self, item, newQuantity):
-        item = self.tryGetItem(item)
+    def change_Quantity(self, itemName, newQuantity):
+        item = self.tryGetItem(itemName)
         if item == None:
             raise RuntimeWarning("Can't change quantity of item since it isn't in the cart")
 
         inventoryQuantity = DatabaseHelper.getInventoryQuantity(item.name)
         if newQuantity > inventoryQuantity:
             raise RuntimeWarning("There are only "+str(inventoryQuantity)+" items in inventory")
-        
+
         item.quantity = newQuantity
         # removed all of item from cart
         if item.quantity <= 0:
@@ -45,9 +45,9 @@ class Cart:
         total = "{:.2f}".format(total)
         return float(total)
 
-    def tryGetItem(self, desiredItem):
+    def tryGetItem(self, desiredItemName):
         for item in self.current_Items:
-            if item.name == desiredItem.name:
+            if item.name == desiredItemName:
                 return item
         return None
 
@@ -56,9 +56,8 @@ class Cart:
         output = " \nShopping cart for "+self.username+"\n"
         for item in self.current_Items:
             output += " "+item.name+"\n"
-            output += "  $"+str(item.price)+"x"+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n" #TODO display price to two decimals
+            output += "  $"+str(item.price)+" x "+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n" #TODO display price to two decimals
             output += "\n"
 
         output += " Total price: $"+str(self.total_Price())
-        output += "\n"
         return output
