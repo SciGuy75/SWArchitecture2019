@@ -12,8 +12,7 @@ def viewCart():
         print ("[2] Back to main menu")
         option = input("Enter number to choose: ")
         if option == "1":
-            #call order item function
-            print ("Order confirmed")
+            myUser.purchase_Cart()
         elif option == "2":
             return
         else:
@@ -70,11 +69,15 @@ def viewInventoryMenu(inventory):
 
 def purchaseHistory():
     print("\nHere is your purchase history")
-    
+    orderList = DatabaseHelper.getUserOrders(myUser.username)
+    for order in orderList:
+        print(order.displayOrder())
     input("Press 'Enter' to return to main menu")
 
 def logOut():
     print("You're logged out!\n")
+    loggedIn = False
+    myUser = None
 
 a = False
 
@@ -119,7 +122,6 @@ while a == False:
                 elif option == "4":
                     #logouut
                     logOut()
-                    loggedIn = False
                     break
                 else:
                     print ("Invalid choice, try again!")

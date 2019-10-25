@@ -4,14 +4,13 @@ from Inventory_Management import DatabaseHelper
 
 class User:
     def __init__(self, username, password):
-        #self.is_Admin = is_Admin
         self.username = username
         self.password = password
         self.shopping_Cart = Cart(self.username)
         return
 
-    def purchase_Cart(self, cart):
-        order = Order(self.username, self.shopping_Cart.current_Items, self.shopping_Cart.total_Price(), None, None)
+    def purchase_Cart(self):
+        order = Order.Order(self.username, self.shopping_Cart.current_Items, self.shopping_Cart.total_Price(), None, None)
 
         shipping_Address = input(" Please enter shipping address: ")
         credit_Card = input(" Please enter credit card: ")
@@ -19,7 +18,7 @@ class User:
         order.shipping_Address = shipping_Address
         order.credit_Card = credit_Card
 
-        print(" Order summary:")
+        print("\n Order summary:")
         print(order.displayOrder())
         confirmation = input(" Confirm order? (y/n): ")
 

@@ -24,14 +24,21 @@ def getUserOrders(username):
     orderList = list()
 
     for orderData in orderDataList:
-        order = Order(orderData[1], orderData[2], orderData[3], orderData[4], orderData[5])
+        stringifiedItems = orderData[2].split('`')
+        items = list()
+        for stringifiedItem in stringifiedItems:
+            stringifiedItem = stringifiedItem.split('~')
+            item = Item(stringifiedItem[0], stringifiedItem[1], float(stringifiedItem[2]), int(stringifiedItem[3]), stringifiedItem[4])
+            items.append(item)
+
+        order = Order(orderData[1], items, float(orderData[3]), orderData[4], orderData[5])
         orderList.append(order)
 
     return orderList
 
 def addOrder(order):
     command = "insert into Orders (username, items, totalPrice, creditCard, address) values"
-    command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.items, order.total_Price, order.credit_Card, order.shipping_Address)
+    command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.stringifyItems(), order.total_Price, order.credit_Card, order.shipping_Address)
     print(queryDatabase(command))
 
 def queryDatabase(query):
