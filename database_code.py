@@ -14,8 +14,8 @@ c = conn.cursor()
 #         ]
 # c.executemany('INSERT INTO Users VALUES (?,?)', users)
 
-# Add items to database
-# Inventory Table ('name', 'description', 'price', 'quantity', 'category')
+# # Add items to database
+# # Inventory Table ('name', 'description', 'price', 'quantity', 'category')
 # c.execute("DELETE FROM Inventory")
 # items = [('aluminum foil', '120 sq ft', '6.99', '285', 'household items'),
 #          ('toothpaste', '4 oz', '5.99', '99', 'household items'),
