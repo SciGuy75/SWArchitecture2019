@@ -13,7 +13,21 @@ def getInventory():
 
     return itemList
 
-def checkItemQuantity(itemName):
+def updateInventory(items):
+    for item in items:
+        available = getInventoryQuantity(item.name)
+        if item.quantity > available:
+            # not enough available
+            raise RuntimeError(f"Can't purchase {item.name}, not enough available")
+        # set new quantity
+        item.quantity = available-item.quantity
+    
+    for item in items:
+        command = f"update Inventory set quantity={str(item.quantity)} where name='{item.name}''"
+        queryDatabase(command)
+    return
+
+def getInventoryQuantity(itemName):
     query = 'select quantity from Inventory where name = "'+itemName+'"'
     quantitycheck = queryDatabase(query)
     return quantitycheck[0][0]
@@ -39,7 +53,7 @@ def getUserOrders(username):
 def addOrder(order):
     command = "insert into Orders (username, items, totalPrice, creditCard, address) values"
     command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.stringifyItems(), order.total_Price, order.credit_Card, order.shipping_Address)
-    print(queryDatabase(command))
+    queryDatabase(command)
 
 def queryDatabase(query):
     results = list()

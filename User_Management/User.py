@@ -23,11 +23,14 @@ class User:
         confirmation = input(" Confirm order? (y/n): ")
 
         if confirmation == 'n':
-            print(" Purchase cancelled")
+            print(" Purchase cancelled\n")
             return
         
+        # update inventory
+        DatabaseHelper.updateInventory(order.items)
         # add to DB
         DatabaseHelper.addOrder(order)
-        # update inventory
         # clear cart
+        self.shopping_Cart = list()
+        print()
         return

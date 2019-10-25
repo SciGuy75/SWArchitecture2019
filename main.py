@@ -1,18 +1,17 @@
 from Inventory_Management import Item, DatabaseHelper
 import User_Management
 
-#DEBUGGING ONLY
-import test
-
 def viewCart():
     print (myUser.shopping_Cart)
     option = 0
+    #TODO add 'change quantity' option
     while option != "1" or option != "2":
         print ("[1] Proceed to checkout")
         print ("[2] Back to main menu")
         option = input("Enter number to choose: ")
         if option == "1":
             myUser.purchase_Cart()
+            continue
         elif option == "2":
             return
         else:
@@ -55,7 +54,7 @@ def viewInventoryMenu(inventory):
             added = False
             while added == False:
                 itemAmount = int(input("Enter amount of item to add: "))
-                amountAvailable = DatabaseHelper.checkItemQuantity(desiredItem.name)
+                amountAvailable = DatabaseHelper.getInventoryQuantity(desiredItem.name)
                 if itemAmount <= amountAvailable:
                     myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
@@ -76,8 +75,6 @@ def purchaseHistory():
 
 def logOut():
     print("You're logged out!\n")
-    loggedIn = False
-    myUser = None
 
 a = False
 
@@ -122,8 +119,8 @@ while a == False:
                 elif option == "4":
                     #logouut
                     logOut()
+                    loggedIn = False
+                    myUser = None
                     break
                 else:
                     print ("Invalid choice, try again!")
-                    #DEBUGGING ONLY
-                    #test.debugMenu(myUser)
