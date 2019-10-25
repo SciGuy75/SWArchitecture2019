@@ -21,15 +21,16 @@ def updateInventory(items):
     for item in items:
         #accesses the inventory to find the available quantity. Will throw an error if you try to take more than what is available.
         available = getInventoryQuantity(item.name)
-        if item.quantity > available:
+        updatedQuantity = item.quantitiy
+        if updatedQuantity > available:
             # will raise an error if not enough available
             raise RuntimeError(f"Can't purchase {item.name}, not enough available")
         # set new quantitiy within the item class
-        item.quantity = available-item.quantity
+        updatedQuantity = available-item.quantity
 
     #updates the amount of items in the database, once items are confirmed to be ordered
     for item in items:
-        command = f"update Inventory set quantity={str(item.quantity)} where name='{item.name}'"
+        command = f"update Inventory set quantity={str(updatedQuantity)} where name='{item.name}'"
         queryDatabase(command)
     return
 
