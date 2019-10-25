@@ -55,6 +55,17 @@ def addOrder(order):
     command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.stringifyItems(), order.total_Price, order.credit_Card, order.shipping_Address)
     queryDatabase(command)
 
+def verifyUser(username, password):
+    command = "SELECT username, password FROM Users where username='{}'".format(username)
+    userInfo = queryDatabase(command)
+
+    if userInfo == []:
+        return False
+    elif username == userInfo[0][0] and password == userInfo[0][1]:
+        return True
+    else:
+        return False
+
 def queryDatabase(query):
     results = list()
 
