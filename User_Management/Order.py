@@ -3,12 +3,13 @@ class Order:
         self.shipping_Address = shipping_Address
         self.total_Price = total_Price
         self.items = items
-        #self.quantity = orderQuantity
+        self.quantity = None
         self.credit_Card = credit_Card
         self.username = username
         return
 
     def displayOrder(self):
+        self.quantity = item.quantity
         output = ""
         for item in self.items:
             output += ("{:^20} | ${:6.2f} x {:3d} = ${:8.2f}\n".format(item.name, item.price, item.quantity, item.price*item.quantity))
@@ -21,6 +22,6 @@ class Order:
     def stringifyItems(self):
         itemList = ""
         for item in self.items:
-            itemList += "`{}~{}~{}~{}~{}".format(item.name, item.description, item.price, item.quantity, item.category)
+            itemList += "`{}~{}~{}~{}~{}".format(item.name, item.description, item.price, self.quantity, item.category)
         # remove first unnecessary backtick
         return itemList[1:]
