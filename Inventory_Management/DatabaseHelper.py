@@ -21,7 +21,7 @@ def updateInventory(items):
     for item in items:
         #accesses the inventory to find the available quantity. Will throw an error if you try to take more than what is available.
         available = getInventoryQuantity(item.name)
-        updatedQuantity = item.quantitiy
+        updatedQuantity = item.quantity
         if updatedQuantity > available:
             # will raise an error if not enough available
             raise RuntimeError(f"Can't purchase {item.name}, not enough available")
