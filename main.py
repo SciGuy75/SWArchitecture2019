@@ -5,14 +5,21 @@ def viewCart():
     print (myUser.shopping_Cart)
     option = 0
     #TODO add 'change quantity' option
-    while option != "1" or option != "2":
-        print ("[1] Proceed to checkout")
-        print ("[2] Back to main menu")
+    while option != "1" or option != "2" or option != "3":
+        print ("    [1] Proceed to checkout")
+        print ("    [2] Change item quantity")
+        print ("    [3] Back to main menu")
         option = input("Enter number to choose: ")
         if option == "1":
             myUser.purchase_Cart()
             continue
         elif option == "2":
+            desiredItem = None
+            cartItemName = input("Enter the item name to change quantity: ")
+            cartItemAmount = int(input("Enter the quantity desired to be: "))
+            myUser.shopping_Cart.change_Quantity(cartItemName, cartItemAmount)
+            print (myUser.shopping_Cart)
+        elif option == "3":
             return
         else:
             print ("Invalid choice, try again!\n")
@@ -33,8 +40,8 @@ def displayInventory():
 def viewInventoryMenu(inventory):
     option = 0
     while option != "1" or option != "2":
-        print ("[1] Add item to cart")
-        print ("[2] Back to main menu")
+        print ("    [1] Add item to cart")
+        print ("    [2] Back to main menu")
         option = input("Enter number to choose: ")
         desiredItem = None
 
@@ -58,7 +65,7 @@ def viewInventoryMenu(inventory):
                 if itemAmount <= amountAvailable:
                     myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
-                    print ("\nItems are added to your cart!\n")
+                    print ("\nItems are added to your cart!")
                 else:
                     print ("We don't have "+str(itemAmount)+" amount in stock, try again!\n")
         elif option == "2":
@@ -101,10 +108,10 @@ while a == False:
                 option = 0
                 #choose menu option
                 print("\nHere's our menu option")
-                print ("[1] View Cart")
-                print ("[2] View Inventory")
-                print ("[3] Purchase History")
-                print ("[4] Log out")
+                print ("    [1] View Cart")
+                print ("    [2] View Inventory")
+                print ("    [3] Purchase History")
+                print ("    [4] Log out")
                 #Can only enter integer right now
                 option = input("Enter number to choose: ")
                 if option == "1":

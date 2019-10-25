@@ -25,7 +25,7 @@ class User:
         if confirmation == 'n':
             print(" Purchase cancelled\n")
             return
-        
+
         # update inventory
         DatabaseHelper.updateInventory(order.items)
         # add to DB
