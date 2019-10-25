@@ -13,8 +13,22 @@ class User:
         order = Order.Order(self.username, self.shopping_Cart.current_Items, self.shopping_Cart.total_Price(), None, None)
 
         shipping_Address = input(" Please enter shipping address: ")
-        credit_Card = input(" Please enter credit card: ")
 
+        valid = False
+        credit_Card = ""
+        while valid == False:
+            credit_Card = input(" Please enter credit card: ")
+            try:
+                val_1 = int(credit_Card)
+                try:
+                    val_2 = credit_Card[10]
+                    print("This is not a valid credit card.")
+                except:
+                    valid = True
+            except:
+                print("This is not a valid credit card.")
+            
+        
         order.shipping_Address = shipping_Address
         order.credit_Card = credit_Card
 
