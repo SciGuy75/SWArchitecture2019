@@ -29,6 +29,11 @@ def getUserOrders(username):
 
     return orderList
 
+def addOrder(order):
+    command = "insert into Orders (username, items, totalPrice, creditCard, address) values"
+    command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.items, order.total_Price, order.credit_Card, order.shipping_Address)
+    print(queryDatabase(command))
+
 def queryDatabase(query):
     results = list()
 

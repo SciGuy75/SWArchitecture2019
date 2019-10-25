@@ -52,12 +52,13 @@ class Cart:
         return None
 
     def __str__(self):
-        output = "\nShopping cart for "+self.username+"\n"
+        output = " \nShopping cart for "+self.username+"\n"
         for item in self.current_Items:
-            output += item.name+"\n"
+            output += " "+item.name+"\n"
             output += "  $"+str(item.price)+"x"+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n"
             output += "\n"
             #printing might look wierd here. might need "\n---\n"
 
-        output += "Total price: $"+str(self.total_Price())
+        output += " Total price: $"+str(self.total_Price())
+        output += "\n"
         return output

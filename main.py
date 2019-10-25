@@ -1,4 +1,4 @@
-from Inventory_Management import *
+from Inventory_Management import Item, DatabaseHelper
 import User_Management
 
 #DEBUGGING ONLY
@@ -24,12 +24,12 @@ def viewInventory():
     viewInventoryMenu(inventory)
 
 def displayInventory():
-    inventoryList = getInventory()
-    print("Name | Description | Price($) | Quantity | Category")
-    print("-----------------------------------------")
+    inventoryList = DatabaseHelper.getInventory()
+    print("{:^20} | {:<30} | {:5} | {:3} | {:<20}".format("Name", "Description", "Price", "Quantity", "Category"))
+    print("-"*100)
     for item in inventoryList:
-        print(item.name," | ",item.description," | ",item.price," | ",item.quantity, " | ",item.category,"\n")
-    print("-----------------------------------------")
+        print("{:^20} | {:<30} | ${:6.2f} | {:3d} | {:^20}".format(item.name, item.description, item.price, item.quantity, item.category))
+    print("-"*100)
     return inventoryList
 
 def viewInventoryMenu(inventory):
@@ -56,13 +56,13 @@ def viewInventoryMenu(inventory):
             added = False
             while added == False:
                 itemAmount = int(input("Enter amount of item to add: "))
-                amountAvailable = checkItemQuantity(desiredItem.name)
+                amountAvailable = DatabaseHelper.checkItemQuantity(desiredItem.name)
                 if itemAmount <= amountAvailable:
                     myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
-                    print ("Items are added to your cart!")
+                    print ("\nItems are added to your cart!\n")
                 else:
-                    print ("We don't have "+str(itemAmount)+" amount in stock, try again!")
+                    print ("We don't have "+str(itemAmount)+" amount in stock, try again!\n")
         elif option == "2":
             return
         else:
@@ -70,22 +70,11 @@ def viewInventoryMenu(inventory):
 
 def purchaseHistory():
     print("\nHere is your purchase history")
-    option = 0
-    while option != "1" or option != "2":
-        print ("[1] Add item to cart")
-        print ("[2] Back to main menu")
-        option = input("Enter number to choose: ")
-        if option == "1":
-            itemAdd = input("Enter the item name to add: ")
-            itemAmount = input("Enter amount of item to add: ")
-            print ("Items are added to your cart!")
-        elif option == "2":
-            return
-        else:
-            print ("Invalid choice, try again!\n")
+    
+    input("Press 'Enter' to return to main menu")
 
 def logOut():
-    print("you're logged out!\n")
+    print("You're logged out!\n")
 
 a = False
 
