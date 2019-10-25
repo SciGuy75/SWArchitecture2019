@@ -3,7 +3,7 @@ import User_Management
 
 # LOGIN CREDENTIALS
 # FORMAT [username, password]
-# admin, admin
+# test, test
 # John, pass
 # Jane, 123
 
