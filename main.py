@@ -1,6 +1,12 @@
 from Inventory_Management import Item, DatabaseHelper
 import User_Management
 
+# LOGIN CREDENTIALS
+# FORMAT [username, password]
+# admin, admin
+# John, pass
+# Jane, 123
+
 def viewCart():
     print (myUser.shopping_Cart)
     option = 0
@@ -88,7 +94,7 @@ while a == False:
         break
     password = input("Enter password: ")
 
-    if not(username == "admin" and password == "pass"):
+    if not(DatabaseHelper.verifyUser(username, password)):
         print ("Incorrect credentials, try again!\n")
     else: #username == admin and password == "pass"
         myUser = User_Management.User(username, password)
