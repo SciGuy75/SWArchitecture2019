@@ -1,6 +1,5 @@
 from Inventory_Management import DatabaseHelper
 
-#Might need to change Cart to shopping_Cart, because that is whats called in the main file.
 
 class Cart:
     def __init__(self, username):
