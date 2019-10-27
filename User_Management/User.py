@@ -3,12 +3,14 @@ from User_Management import Order
 from Inventory_Management import DatabaseHelper
 
 class User:
+    #construction function
     def __init__(self, username, password):
         self.username = username
         self.password = password
         self.shopping_Cart = Cart(self.username)
         return
 
+    #confirming placing an order
     def purchase_Cart(self):
         order = Order.Order(self.username, self.shopping_Cart.current_Items, self.shopping_Cart.total_Price(), None, None)
 
@@ -27,8 +29,8 @@ class User:
                     valid = True
             except:
                 print("This is not a valid credit card.")
-            
-        
+
+
         order.shipping_Address = shipping_Address
         order.credit_Card = credit_Card
 

@@ -101,15 +101,17 @@ while a == False:
         break
     password = input("Enter password: ")
 
+    #check if the username and password exist in the database
     if not(DatabaseHelper.verifyUser(username, password)):
         print ("Incorrect credentials, try again!\n")
-    else: #username == admin and password == "pass"
+    else: #correct credentials
         myUser = User_Management.User(username, password)
 
         print("You're logged in!")
         loggedIn = True
         while loggedIn == True:
             option = 0
+            #show menu option
             while option != "1" or option != "2" or option != "3" or option != "4":
                 option = 0
                 #choose menu option
@@ -118,7 +120,6 @@ while a == False:
                 print ("    [2] View Inventory")
                 print ("    [3] Purchase History")
                 print ("    [4] Log out")
-                #Can only enter integer right now
                 option = input("Enter number to choose: ")
                 if option == "1":
                     #call view cart function

@@ -2,11 +2,13 @@ from Inventory_Management import DatabaseHelper
 
 
 class Cart:
+    #construction function
     def __init__(self, username):
         self.username = username
         self.current_Items = list()
         return
 
+    #add item to cart
     def add_Item(self, item, quantity):
         item.quantity = quantity
         # attempting to add an item that already exists
@@ -16,6 +18,7 @@ class Cart:
             self.current_Items.append(item)
         return
 
+    #change item quantitu in cart
     def change_Quantity(self, itemName, newQuantity):
         item = self.tryGetItem(itemName)
         if item == None:
@@ -31,6 +34,7 @@ class Cart:
             self.remove_Item(item)
         return
 
+    #remove item if quantity <= 0
     def remove_Item(self, item):
         item = self.tryGetItem(item)
         if (item == None):
@@ -38,6 +42,7 @@ class Cart:
         self.current_Items.remove(item)
         return
 
+    #calculate total price in cart
     def total_Price(self):
         total = 0.0
         for item in self.current_Items:
@@ -45,13 +50,14 @@ class Cart:
         total = "{:.2f}".format(total)
         return float(total)
 
+    #check if item is in cart or not
     def tryGetItem(self, desiredItemName):
         for item in self.current_Items:
             if item.name == desiredItemName:
                 return item
         return None
 
-    #TODO Make look good
+    #output the cart info
     def __str__(self):
         output = " \nShopping cart for "+self.username+"\n"
         for item in self.current_Items:

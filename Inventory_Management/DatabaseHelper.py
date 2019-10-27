@@ -44,7 +44,7 @@ def getInventoryQuantity(itemName):
     return quantitycheck[0][0]
 
 
-
+#retrieve order info from DB
 def getUserOrders(username):
     query = 'select * from Orders where username = "'+username+'"'
     orderDataList = queryDatabase(query)
@@ -63,11 +63,13 @@ def getUserOrders(username):
 
     return orderList
 
+#add an order to DB
 def addOrder(order):
     command = "insert into Orders (username, items, totalPrice, creditCard, address) values"
     command += "('{}', '{}', '{}', '{}', '{}')".format(order.username, order.stringifyItems(), order.total_Price, order.credit_Card, order.shipping_Address)
     queryDatabase(command)
 
+#check if username /password exist in DB
 def verifyUser(username, password):
     command = "SELECT username, password FROM Users where username='{}'".format(username)
     userInfo = queryDatabase(command)
@@ -79,6 +81,7 @@ def verifyUser(username, password):
     else:
         return False
 
+#query the DB
 def queryDatabase(query):
     results = list()
 
