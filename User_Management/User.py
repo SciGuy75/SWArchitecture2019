@@ -18,18 +18,12 @@ class User:
         shipping_Address = input(" Please enter shipping address: ")
 
         #asking for credit cart number
-        valid = False
         credit_Card = ""
-        while valid == False:
+        while True:
             credit_Card = input(" Please enter credit card: ")
-            try:
-                val_1 = int(credit_Card)
-                try:
-                    val_2 = credit_Card[10]
-                    print("This is not a valid credit card.")
-                except:
-                    valid = True
-            except:
+            if (credit_Card.isnumeric() and len(credit_Card) == 10):
+                break
+            else: #is not numeric or is not 10 digits long
                 print("This is not a valid credit card.")
 
 

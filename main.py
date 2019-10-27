@@ -9,9 +9,8 @@ import User_Management
 
 #display items and price in cart
 def viewCart():
-    print (myUser.shopping_Cart)
+    displayCart(myUser.shopping_Cart)
     option = 0
-    #TODO add 'change quantity' option
     while option != "1" or option != "2" or option != "3":
         print ("    [1] Proceed to checkout")
         print ("    [2] Change item quantity")
@@ -24,7 +23,6 @@ def viewCart():
         #change the quantity
         #remove item if quantity <= 0
         elif option == "2":
-            desiredItem = None
             cartItemName = input("Enter the item name to change quantity: ")
             cartItemAmount = int(input("Enter the quantity desired to be: "))
             myUser.shopping_Cart.change_Quantity(cartItemName, cartItemAmount)
@@ -33,6 +31,13 @@ def viewCart():
             return
         else:
             print ("Invalid choice, try again!\n")
+
+def displayCart(cart):
+    print(" \nYour shopping cart:")
+    for item in cart.current_Items:
+        print(" "+item.name)
+        print("  ${:.2f} x {} = ${:.2f}\n".format(item.price, item.quantity, item.price*item.quantity))
+    print(" Total price: $"+str(self.total_Price()))
 
 #show available inventory
 def viewInventory():
@@ -63,6 +68,7 @@ def viewInventoryMenu(inventory):
             itemFound = False
             while itemFound == False:
                 itemAdd = input("Enter the item name to add: ")
+                # Ensure user entered valid item name
                 for item in inventory:
                     if item.name == itemAdd:
                         desiredItem = item

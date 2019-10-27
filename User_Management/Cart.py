@@ -56,14 +56,3 @@ class Cart:
             if item.name == desiredItemName:
                 return item
         return None
-
-    #output the cart info
-    def __str__(self):
-        output = " \nShopping cart for "+self.username+"\n"
-        for item in self.current_Items:
-            output += " "+item.name+"\n"
-            output += "  $"+str(item.price)+" x "+str(item.quantity)+" = $"+str(item.price*item.quantity)+"\n" #TODO display price to two decimals
-            output += "\n"
-
-        output += " Total price: $"+str(self.total_Price())
-        return output
