@@ -8,24 +8,24 @@ import User_Management
 # Jane, 123
 
 #display items and price in cart
-def viewCart():
+def viewCart(user):
     option = 0
     while option != "1" or option != "2" or option != "3":
-        displayCart(myUser.shopping_Cart)
+        displayCart(user.shopping_Cart)
         print ("    [1] Proceed to checkout")
         print ("    [2] Change item quantity")
         print ("    [3] Back to main menu")
         option = input("Enter number to choose: ")
         #continue to confirm order
         if option == "1":
-            purchaseCart(myUser)
+            purchaseCart(user)
             return
         #change the quantity
         #remove item if quantity <= 0
         elif option == "2":
             cartItemName = input("Enter the item name to change quantity: ")
             cartItemAmount = int(input("Enter the new quantity: "))
-            myUser.shopping_Cart.change_Quantity(cartItemName, cartItemAmount)
+            user.shopping_Cart.change_Quantity(cartItemName, cartItemAmount)
         elif option == "3":
             return
         else:
@@ -78,7 +78,7 @@ def displayInventory():
     return inventoryList
 
 #show available inventory
-def viewInventory():
+def viewInventory(user):
     option = 0
     while option != "1" or option != "2":
         inventory = displayInventory()
@@ -106,7 +106,7 @@ def viewInventory():
                 itemAmount = int(input("Enter amount of item to add: "))
                 amountAvailable = DatabaseHelper.getInventoryQuantity(desiredItem.name)
                 if itemAmount <= amountAvailable:
-                    myUser.shopping_Cart.add_Item(desiredItem, itemAmount)
+                    user.shopping_Cart.add_Item(desiredItem, itemAmount)
                     added = True
                     print ("\nItems are added to your cart!")
                 else:
@@ -117,9 +117,9 @@ def viewInventory():
             print ("Invalid choice, try again!\n")
 
 #view pass purchase items
-def purchaseHistory():
+def purchaseHistory(user):
     print("\nHere is your purchase history")
-    orderList = DatabaseHelper.getUserOrders(myUser.username)
+    orderList = DatabaseHelper.getUserOrders(user.username)
     for order in orderList:
         displayOrder(order)
     input("Press 'Enter' to return to main menu")
@@ -140,53 +140,56 @@ def displayOrder(order):
 def logOut():
     print("You're logged out!\n")
 
-a = False
+def mainUILoop():
+    a = False
 
-#logging in
-while a == False:
-    print ("Welcome to our store! (type 'exit' as username to quit)\n")
-    username = input("Enter username: ")
-    #exit program
-    if username == "exit":
-        # exit program
-        break
-    password = input("Enter password: ")
+    #logging in
+    while a == False:
+        print ("Welcome to our store! (type 'exit' as username to quit)\n")
+        username = input("Enter username: ")
+        #exit program
+        if username == "exit":
+            # exit program
+            break
+        password = input("Enter password: ")
 
-    #check if the username and password exist in the database
-    if not(DatabaseHelper.verifyUser(username, password)):
-        print ("Incorrect credentials, try again!\n")
-    else: #correct credentials
-        myUser = User_Management.User(username, password)
+        #check if the username and password exist in the database
+        if not(DatabaseHelper.verifyUser(username, password)):
+            print ("Incorrect credentials, try again!\n")
+        else: #correct credentials
+            myUser = User_Management.User(username, password)
 
-        print("You're logged in!")
-        loggedIn = True
-        while loggedIn == True:
-            option = 0
-            #show menu option
-            while option != "1" or option != "2" or option != "3" or option != "4":
+            print("You're logged in!")
+            loggedIn = True
+            while loggedIn == True:
                 option = 0
-                #choose menu option
-                print("\nHere's our menu option")
-                print ("    [1] View Cart")
-                print ("    [2] View Inventory")
-                print ("    [3] Purchase History")
-                print ("    [4] Log out")
-                option = input("Enter number to choose: ")
-                if option == "1":
-                    #call view cart function
-                    viewCart()
-                elif option == "2":
-                    #call show inventory function
-                    viewInventory()
-                elif option == "3":
-                    #call show purchase history function
-                    purchaseHistory()
-                elif option == "4":
-                    #logouut
-                    logOut()
-                    loggedIn = False
-                    myUser = None
-                    #break out of the logged in loop
-                    break
-                else:
-                    print ("Invalid choice, try again!")
+                #show menu option
+                while option != "1" or option != "2" or option != "3" or option != "4":
+                    option = 0
+                    #choose menu option
+                    print("\nHere's our menu option")
+                    print ("    [1] View Cart")
+                    print ("    [2] View Inventory")
+                    print ("    [3] Purchase History")
+                    print ("    [4] Log out")
+                    option = input("Enter number to choose: ")
+                    if option == "1":
+                        #call view cart function
+                        viewCart(myUser)
+                    elif option == "2":
+                        #call show inventory function
+                        viewInventory(myUser)
+                    elif option == "3":
+                        #call show purchase history function
+                        purchaseHistory(myUser)
+                    elif option == "4":
+                        #logouut
+                        logOut()
+                        loggedIn = False
+                        myUser = None
+                        #break out of the logged in loop
+                        break
+                    else:
+                        print ("Invalid choice, try again!")
+
+mainUILoop()
