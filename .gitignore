@@ -3,3 +3,4 @@
 *.pyc
 .vscode/launch.json
 *.db
+database.db

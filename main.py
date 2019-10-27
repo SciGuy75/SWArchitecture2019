@@ -9,9 +9,9 @@ import User_Management
 
 #display items and price in cart
 def viewCart():
-    displayCart(myUser.shopping_Cart)
     option = 0
     while option != "1" or option != "2" or option != "3":
+        displayCart(myUser.shopping_Cart)
         print ("    [1] Proceed to checkout")
         print ("    [2] Change item quantity")
         print ("    [3] Back to main menu")
@@ -19,14 +19,13 @@ def viewCart():
         #continue to confirm order
         if option == "1":
             purchaseCart(myUser)
-            continue
+            return
         #change the quantity
         #remove item if quantity <= 0
         elif option == "2":
             cartItemName = input("Enter the item name to change quantity: ")
-            cartItemAmount = int(input("Enter the quantity desired to be: "))
+            cartItemAmount = int(input("Enter the new quantity: "))
             myUser.shopping_Cart.change_Quantity(cartItemName, cartItemAmount)
-            print (myUser.shopping_Cart)
         elif option == "3":
             return
         else:
@@ -68,12 +67,7 @@ def displayCart(cart):
         print("  ${:.2f} x {} = ${:.2f}\n".format(item.price, item.quantity, item.price*item.quantity))
     print(" Total price: $"+str(cart.total_Price()))
 
-#show available inventory
-def viewInventory():
-    inventory = displayInventory()
-    viewInventoryMenu(inventory)
-
-#display the item in inventory
+#display the items in inventory
 def displayInventory():
     inventoryList = DatabaseHelper.getInventory()
     print("{:^20} | {:^30} | {:^7} | {:^8} | {:^20}".format("Name", "Description", "Price", "Quantity", "Category"))
@@ -83,10 +77,11 @@ def displayInventory():
     print("-"*100)
     return inventoryList
 
-#option to add item to cart or go back
-def viewInventoryMenu(inventory):
+#show available inventory
+def viewInventory():
     option = 0
     while option != "1" or option != "2":
+        inventory = displayInventory()
         print ("    [1] Add item to cart")
         print ("    [2] Back to main menu")
         option = input("Enter number to choose: ")
@@ -126,7 +121,7 @@ def purchaseHistory():
     print("\nHere is your purchase history")
     orderList = DatabaseHelper.getUserOrders(myUser.username)
     for order in orderList:
-        print(order.displayOrder())
+        displayOrder(order)
     input("Press 'Enter' to return to main menu")
 
 #display order in legible format
