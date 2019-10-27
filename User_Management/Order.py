@@ -9,19 +9,6 @@ class Order:
         self.username = username
         return
 
-    #display the order/ order history
-    def displayOrder(self):
-
-        output = ""
-        for item in self.items:
-            output += ("{:^20} | ${:6.2f} x {:3d} = ${:8.2f}\n".format(item.name, item.price, item.quantity, item.price*item.quantity))
-            #self.quantity = item.quantity
-        output += (" Total price: ${:8.2f}\n".format(self.total_Price))
-        output += (" To: "+self.shipping_Address+"\n")
-        output += (" On card: "+str(self.credit_Card)+"\n")
-        output += ("-"*50)
-        return output
-
     #put order infor into a string for DB
     def stringifyItems(self):
         itemList = ""

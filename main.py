@@ -18,7 +18,7 @@ def viewCart():
         option = input("Enter number to choose: ")
         #continue to confirm order
         if option == "1":
-            myUser.purchase_Cart()
+            purchaseCart(myUser)
             continue
         #change the quantity
         #remove item if quantity <= 0
@@ -32,12 +32,41 @@ def viewCart():
         else:
             print ("Invalid choice, try again!\n")
 
+#get user inputs to confirm order
+def purchaseCart(user):
+    #asking for shipping address
+    shipping_Address = input(" Please enter shipping address: ")
+
+    #asking for credit cart number
+    credit_Card = ""
+    while True:
+        credit_Card = input(" Please enter credit card: ")
+        if (credit_Card.isnumeric() and len(credit_Card) == 10):
+            break
+        else: #is not numeric or is not 10 digits long
+            print("This is not a valid credit card.")
+
+    order = User_Management.Order(user.username, user.shopping_Cart.current_Items, user.shopping_Cart.total_Price(), credit_Card, shipping_Address)
+    order.shipping_Address = shipping_Address
+    order.credit_Card = credit_Card
+
+    print("\n Order summary:")
+    displayOrder(order)
+    #user confirm purchase
+    confirmation = input(" Confirm order? (y/n): ")
+
+    if confirmation == 'y':
+        user.finalize_Order(order)
+    else:
+        print(" Purchase cancelled\n")
+    
+#display cart in legible format
 def displayCart(cart):
     print(" \nYour shopping cart:")
     for item in cart.current_Items:
         print(" "+item.name)
         print("  ${:.2f} x {} = ${:.2f}\n".format(item.price, item.quantity, item.price*item.quantity))
-    print(" Total price: $"+str(self.total_Price()))
+    print(" Total price: $"+str(cart.total_Price()))
 
 #show available inventory
 def viewInventory():
@@ -99,6 +128,18 @@ def purchaseHistory():
     for order in orderList:
         print(order.displayOrder())
     input("Press 'Enter' to return to main menu")
+
+#display order in legible format
+def displayOrder(order):
+    output = ""
+    for item in order.items:
+        output += ("{:^20} | ${:6.2f} x {:3d} = ${:8.2f}\n".format(item.name, item.price, item.quantity, item.price*item.quantity))
+        
+    output += (" Total price: ${:8.2f}\n".format(order.total_Price))
+    output += (" To: "+order.shipping_Address+"\n")
+    output += (" On card: "+str(order.credit_Card)+"\n")
+    output += ("-"*50)
+    print(output)
 
 #print user is logged out
 def logOut():
