@@ -192,4 +192,7 @@ def mainUILoop():
                     else:
                         print ("Invalid choice, try again!")
 
-mainUILoop()
+try:
+    mainUILoop()
+except:
+    pass

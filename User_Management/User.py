@@ -17,4 +17,4 @@ class User:
         # add order to DB
         DatabaseHelper.addOrder(order)
         # clear cart
-        self.shopping_Cart = list()
+        self.shopping_Cart = Cart(self.username)

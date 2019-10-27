@@ -12,7 +12,7 @@ class Cart:
     def add_Item(self, item, quantity):
         item.quantity = quantity
         # attempting to add an item that already exists
-        if self.tryGetItem(item) != None:
+        if self.tryGetItem(item.name) != None:
             self.change_Quantity(item, quantity)
         else:
             self.current_Items.append(item)
@@ -31,12 +31,12 @@ class Cart:
         item.quantity = newQuantity
         # removed all of item from cart
         if item.quantity <= 0:
-            self.remove_Item(item)
+            self.remove_Item(itemName)
         return
 
     #remove item if quantity <= 0
-    def remove_Item(self, item):
-        item = self.tryGetItem(item)
+    def remove_Item(self, itemName):
+        item = self.tryGetItem(itemName)
         if (item == None):
             raise RuntimeWarning("Can't remove item since it isn't in the cart")
         self.current_Items.remove(item)
