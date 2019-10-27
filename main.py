@@ -7,6 +7,7 @@ import User_Management
 # John, pass
 # Jane, 123
 
+#display items and price in cart
 def viewCart():
     print (myUser.shopping_Cart)
     option = 0
@@ -16,9 +17,12 @@ def viewCart():
         print ("    [2] Change item quantity")
         print ("    [3] Back to main menu")
         option = input("Enter number to choose: ")
+        #continue to confirm order
         if option == "1":
             myUser.purchase_Cart()
             continue
+        #change the quantity
+        #remove item if quantity <= 0
         elif option == "2":
             desiredItem = None
             cartItemName = input("Enter the item name to change quantity: ")
@@ -30,10 +34,12 @@ def viewCart():
         else:
             print ("Invalid choice, try again!\n")
 
+#show available inventory
 def viewInventory():
     inventory = displayInventory()
     viewInventoryMenu(inventory)
 
+#display the item in inventory
 def displayInventory():
     inventoryList = DatabaseHelper.getInventory()
     print("{:^20} | {:^30} | {:^7} | {:^8} | {:^20}".format("Name", "Description", "Price", "Quantity", "Category"))
@@ -43,6 +49,7 @@ def displayInventory():
     print("-"*100)
     return inventoryList
 
+#option to add item to cart or go back
 def viewInventoryMenu(inventory):
     option = 0
     while option != "1" or option != "2":
@@ -79,6 +86,7 @@ def viewInventoryMenu(inventory):
         else:
             print ("Invalid choice, try again!\n")
 
+#view pass purchase items
 def purchaseHistory():
     print("\nHere is your purchase history")
     orderList = DatabaseHelper.getUserOrders(myUser.username)
@@ -86,6 +94,7 @@ def purchaseHistory():
         print(order.displayOrder())
     input("Press 'Enter' to return to main menu")
 
+#print user is logged out
 def logOut():
     print("You're logged out!\n")
 
@@ -135,6 +144,7 @@ while a == False:
                     logOut()
                     loggedIn = False
                     myUser = None
+                    #break out of the logged in loop
                     break
                 else:
                     print ("Invalid choice, try again!")

@@ -14,8 +14,10 @@ class User:
     def purchase_Cart(self):
         order = Order.Order(self.username, self.shopping_Cart.current_Items, self.shopping_Cart.total_Price(), None, None)
 
+        #asking for shipping address
         shipping_Address = input(" Please enter shipping address: ")
 
+        #asking for credit cart number
         valid = False
         credit_Card = ""
         while valid == False:
@@ -36,6 +38,7 @@ class User:
 
         print("\n Order summary:")
         print(order.displayOrder())
+        #user confirm purchase
         confirmation = input(" Confirm order? (y/n): ")
 
         if confirmation == 'n':
@@ -44,7 +47,7 @@ class User:
 
         # update inventory
         DatabaseHelper.updateInventory(order.items)
-        # add to DB
+        # add order to DB
         DatabaseHelper.addOrder(order)
         # clear cart
         self.shopping_Cart = list()
